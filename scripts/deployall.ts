@@ -3,6 +3,8 @@ import { ethers } from "hardhat";
 async function main() {
  
   let youraddressforfee= "0x7a57Ce4805eeaeDcBD4291c4Fd52c83Df85D0370";
+  let blockreward= BigInt(Number(rewardhere));
+  let startblock= BigInt(Number(startblockhere));
   console.log("Deploying SobaToken");
 
   const sobaToken = await ethers.deployContract("contracts/SobaToken.sol:SobaToken", [], {
@@ -49,7 +51,7 @@ await hre.run("verify:verify", {
 
 await hre.run("verify:verify", {
   address: masterchef.target,
-  constructorArguments: [sobaToken.target,syrup.target,youraddressforfee,BigInt(Number(20000000000000000000)),BigInt(Number(2637610))],
+  constructorArguments: [sobaToken.target,syrup.target,youraddressforfee,blockreward,startblock],
   contract: "contracts/MasterChef.sol:MasterChef"
 });
 
